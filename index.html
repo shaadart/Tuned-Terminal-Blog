@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Blog</title>
+    <link rel="stylesheet" href="style.css">
+      <!-- Include Google Font -->
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div id="terminal">
+        <div id="output">
+            <pre>Welcome to my Terminal Blog!</pre>
+            <pre id="ascii-art"> 
+  ____  _       __          _    
+ / ___|| |_   _/ _| ___  __| | ___ 
+ \___ \| | | | |_|/ _ \/ _` |/ _ \
+  ___) | | |_|  _|  __/ (_| |  __/
+ |____/|_|\__,_|_|  \___|\__,_|\___|
+
+</pre>
+            <pre>System has been running for: <span id="uptime">...</span></pre>
+            <pre>Type <code>help</code> to see the list of commands.</pre>
+        </div>
+        <div id="input">
+            <span id="prompt">$ </span>
+            <input type="text" id="command" autofocus autocomplete="off">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
