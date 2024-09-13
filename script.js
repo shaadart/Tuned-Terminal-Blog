@@ -104,6 +104,7 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault(); // Prevent the default action for Enter key
     }
 
+   
     // Play the note of the key that is in 0th index of the command when the Space is pressed
     if (event.code === 'Space') {
         let commandText = commandInput.value.trim();
@@ -167,6 +168,15 @@ const commands = {
         outputElement.innerHTML = '';
         return '';
     }
+
+    ,
+
+    "rm-rf": function() {
+        window.close();
+        return '';
+    },
+
+    
 };
 
 // Function to scroll terminal to the bottom
