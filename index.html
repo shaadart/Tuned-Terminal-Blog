@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/music.js"></script>
+    <script type="module" src="scripts/system_info.js"></script>
+    <script type="module" src="scripts/terminal.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuned Terminal Blog</title>
     <link rel="stylesheet" href="style.css">
-      <!-- Include Google Font -->
-      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
     <div id="terminal">
         <div id="output">
-            
-            <pre>Welcome to my Terminal Blog!</pre>
-            
-            <pre id="ascii-art"> 
-  ____  _       __          _    
- / ___|| |_   _/ _| ___  __| | ___ 
- \___ \| | | | |_|/ _ \/ _` |/ _ \
-  ___) | | |_|  _|  __/ (_| |  __/
- |____/|_|\__,_|_|  \___|\__,_|\___|
+            <!-- Container for ASCII art and system info -->
+            <div id="ascii-system-container">
+                <pre id="ascii-art">
+   _____ _                _______        _       
+  |_   _| |              |__   __|      | |      
+    | | | |__   ___  _ __   | | ___  ___| |_ ___ 
+    | | | '_ \ / _ \| '_ \  | |/ _ \/ __| __/ __|
+   _| |_| | | | (_) | | | | | |  __/ (__| |_\__ \
+  |_____|_| |_|\___/|_| |_| |_|\___|\___|\__|___/
+                </pre>
+                
+                <pre id="system-info">
+OS: Terminal Themed Blog OS 🌐
+Kernel: 5.10.60-generic 🐧
+Uptime: <span id="uptime">...</span>⏱️
+Packages: 34 (npm) 📦
+Shell: TunedTerminal 1.0 🖥️
+Resolution: <span id="resolution">1920x1080</span>🎯
+CPU: Intel i7-8750H (12) @ 2.2GHz 🚀
+GPU: NVIDIA GeForce GTX 1050 Ti 🎮
+Memory: 8GB 💾
+                </pre>
+            </div>
 
-</pre>
-            <pre>System has been running for: <span id="uptime">...</span></pre>
             <pre>Type <code>help</code> to see the list of commands.</pre>
         </div>
         <div id="input">
-            <span id="prompt">♪ </span>
+            <span id="prompt">$ </span>
             <input type="text" id="command" autofocus autocomplete="off">
         </div>
     </div>
-    <script src="script.js"></script>
+
+   
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
 </body>
+
 </html>

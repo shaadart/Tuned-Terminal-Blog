@@ -6,8 +6,9 @@
 
 body {
     background-color: #1d1f21;
-    color: #ff69f8;
+    color: #00ff00;
     display: flex;
+    
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -18,22 +19,41 @@ body {
     background-color: #000;
     border-radius: 8px;
     padding: 10px;
-    width: 100%;
+    width: 90%;
+    height: 90%;
+    
     max-height: 600px;
     overflow-y: auto;
     border: 2px solid #00ff00;
+    display: flex;
+    flex-direction: column;
 }
 
 #output {
-    white-space: pre-wrap;
+    display: flex;
+    flex-direction: column;
     color: #00ff00;
+    white-space: pre-wrap;
 }
 
+/* Flex container to make ascii-art and system-info responsive */
+#ascii-system-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    justify-content: space-between;
+    gap: 10px; /* Spacing between the two sections */
+}
+
+#ascii-art, #system-info {
+    flex: 1;
+    min-width: 300px; /* Ensures elements wrap when screen size is smaller */
+}
+
+/* Input section */
 #input {
     display: flex;
     align-items: center;
     margin-top: 10px;
-    /* color: #fff; */
 }
 
 #prompt {
@@ -48,10 +68,6 @@ body {
     width: 100%;
     outline: none;
     caret-color: #fff;
-}
-
-#ascii-art {
-    margin-bottom: 10px;
 }
 
 pre code {
@@ -74,6 +90,7 @@ pre code .token.function {
     color: #8be9fd; /* Function name color */
 }
 
+/* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -84,4 +101,11 @@ pre code .token.function {
 
 ::-webkit-scrollbar-track {
     background-color: #1d1f21;
+}
+
+/* Media query to switch to row layout on larger screens */
+@media (min-width: 768px) {
+    #ascii-system-container {
+        flex-direction: row; /* Display side-by-side on wide screens */
+    }
 }
