@@ -6,33 +6,38 @@
 
 body {
     background-color: #1d1f21;
-    color: #00ff00;
+    color: #559fff;
     display: flex;
-    
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     height: 100vh;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
 }
 
 #terminal {
     background-color: #000;
     border-radius: 8px;
     padding: 10px;
-    width: 90%;
+    width: 95%;
     height: 90%;
-    
     max-height: 600px;
     overflow-y: auto;
-    border: 2px solid #00ff00;
+    border: 2px solid #559fff;
     display: flex;
     flex-direction: column;
+    flex-grow: 1; /* Allow terminal to take up available space */
+}
+
+iframe {
+    border-radius: 8px; /* Match terminal's border radius */
+    flex: 1;
 }
 
 #output {
     display: flex;
     flex-direction: column;
-    color: #00ff00;
+    color: #559fff;
     white-space: pre-wrap;
 }
 
@@ -46,7 +51,7 @@ body {
 
 #ascii-art, #system-info {
     flex: 1;
-    min-width: 300px; /* Ensures elements wrap when screen size is smaller */
+    /* min-width: 300px; Ensures elements wrap when screen size is smaller */
 }
 
 /* Input section */
@@ -64,14 +69,16 @@ body {
     background-color: transparent;
     border: none;
     color: #fff;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: monospace;
     width: 100%;
     outline: none;
-    caret-color: #fff;
+    caret-color: #559fff;
 }
 
 pre code {
-    color: #00ff00; /* Default color for code blocks */
+    color: #a0ecff; /* Default color for code blocks */
+    font-style: bold;
+    font-weight: 600;
 }
 
 pre code .token.comment {
@@ -96,7 +103,7 @@ pre code .token.function {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #00ff00;
+    background-color: #559fff;
 }
 
 ::-webkit-scrollbar-track {
@@ -107,5 +114,64 @@ pre code .token.function {
 @media (min-width: 768px) {
     #ascii-system-container {
         flex-direction: row; /* Display side-by-side on wide screens */
+    }
+}
+
+/* Styles for colored command output */
+.command {
+    color: #8be9fd; /* Color for commands like ls, cd, cat, etc. */
+}
+
+.error {
+    color: #ff5555; /* Color for error messages */
+}
+
+.directory {
+    color: #50fa7b; /* Color for directory names */
+}
+
+.file {
+    color: #f1fa8c; /* Color for file names */
+}
+
+.info {
+    color: #ffb86c; /* Color for system info labels */
+}
+
+.prompt {
+    color: #ff79c6; /* Color for the prompt hint */
+}
+
+
+/* Footer button styles */
+#footer-buttons {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px; 
+    padding-bottom: 21px; /* Add some padding at the bottom for spacing */
+}
+
+#footer-buttons button {
+    background-color: #1d1f21;
+    border: 1px solid #559fff;
+    color: #559fff;
+    padding: 2px 5px;
+    margin: 0 10px;
+    font-family: monospace;
+    font-size: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#footer-buttons button:hover {
+    background-color: #559fff;
+    color: #1d1f21;
+}
+
+/* Ensure buttons are responsive */
+@media (max-width: 768px) {
+    #footer-buttons button {
+        font-size: 12px;
+        padding: 5px;
     }
 }

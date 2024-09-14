@@ -19,7 +19,7 @@ export function updateUptime(uptimeElement) {
 
 
 // Function to update the resolution display
-function updateResolution() {
+export function updateResolution() {
     // Get the resolution element
     const resolutionElement = document.getElementById('resolution');
     

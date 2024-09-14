@@ -1,5 +1,4 @@
-// terminal.js
-import { updateUptime } from './system_info.js';
+import { updateUptime, updateResolution } from './system_info.js';
 
 export const outputElement = document.getElementById("output");
 export const commandInput = document.getElementById("command");
@@ -15,26 +14,25 @@ let blogs = {
         content: "This blog covers the latest technology trends in 2024."
     }
 };
-
 export const commands = {
     help: function() {
-        return `Available commands:\n- ls: List directories and blog posts\n- cd [directory]: Navigate between directories\n- cat [file]: Display content of a blog post\n- clear: Clear the terminal`;
+        return `Available commands:\n <span class="command">ls</span>List directories and blog posts\n <span class="command">cd [directory]</span>Moves you into a specific directory (or folder)\n <span class="command">cat [file]</span>Read the content of a blog post\n <span class="command">clear</span>Clear the terminal`;
     },
     "ls": function() {
         if (currentDirectory === "home") {
-            return "home\nblog/";
+            return "<span class='directory'>home</span>\n<span class='directory'>blog/</span>";
         } else if (currentDirectory === "blog") {
-            return Object.keys(blogs).map(file => `- ${file}`).join('\n');
+            return Object.keys(blogs).map(file => `<span class='file'>- ${file}</span>`).join('\n');
         }
     },
-    cd: function(args) {
+    "cd": function(args) {
         if (args[0] === "home" || args[0] === "blog") {
             currentDirectory = args[0];
             updatePrompt();
-            return `Moved to ${args[0]} directory`;
+            return `<span class="command">Moved to ${args[0]} directory</span>`;
         } else {
             playErrorSound();
-            return `cd: ${args[0]}: No such directory`;
+            return `<span class="error">cd: ${args[0]}: No such directory</span>`;
         }
     },
     cat: function(args) {
@@ -44,55 +42,65 @@ export const commands = {
                 return `<h3>Title: ${blogs[file].title}</h3>\n<pre><code class="language-javascript">${Prism.highlight(blogs[file].content, Prism.languages.javascript, 'javascript')}</code></pre>`;
             } else {
                 playErrorSound();
-                return `cat: ${file}: No such file`;
+                return `<span class="error">cat: ${file}: No such file</span>`;
             }
         } else {
             playErrorSound();
-            return `cat: You are not in the blog directory`;
+            return `<span class="error">cat: You are not in the blog directory</span>`;
         }
     },
-    clear: function() {
+    "clear": function() {
         // Reset the terminal output to the default HTML content
         outputElement.innerHTML = `
+           <!-- Container for ASCII art and system info -->
             <div id="ascii-system-container">
                 <pre id="ascii-art">
-       _____ _                _______        _       
-      |_   _| |              |__   __|      | |      
-        | | | |__   ___  _ __   | | ___  ___| |_ ___ 
-        | | | '_ \\ / _ \\| '_ \\  | |/ _ \\/ __| __/ __|
-       _| |_| | | | (_) | | | | | |  __/ (__| |_\\__ \\
-      |_____|_| |_|\\___/|_| |_| |_|\\___|\\___|\\__|___/
+   <!-- _____ _                _______        _       
+  |_   _| |              |__   __|      | |      
+    | | | |__   ___  _ __   | | ___  ___| |_ ___ 
+    | | | '_ \ / _ \| '_ \  | |/ _ \/ __| __/ __|
+   _| |_| | | | (_) | | | | | |  __/ (__| |_\__ \
+  |_____|_| |_|\___/|_| |_| |_|\___|\___|\__|___/ -->
+  <iframe src="https://giphy.com/embed/JqmupuTVZYaQX5s094" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Smolverse-smol-smolverse-swol-JqmupuTVZYaQX5s094"></a></p>
                 </pre>
                 
                 <pre id="system-info">
-OS: Terminal Themed Blog OS 🌐
-Kernel: 5.10.60-generic 🐧
-Uptime: <span id="uptime">...</span> ⏱️
-Packages: 34 (npm) 📦
-Shell: TunedTerminal 1.0 🖥️
-Resolution: 1920x1080 🎯
-CPU: Intel i7-8750H (12) @ 2.2GHz 🚀
-GPU: NVIDIA GeForce GTX 1050 Ti 🎮
-Memory: 8GB 💾
+<code>OS</code> : Terminal Themed Blog OS 🌐
+<code>Kernel</code> : UPES CSA  🐧
+<code>Theme</code> : Cyberpunk Security 🌃
+<code>Uptime</code> : <span id="uptime">...</span>⏱️
+<code>Packages</code> : 34 (npm) 📦
+<code>Shell</code> : TunedTerminal 1.0 🖥️
+<code>Resolution</code> : <span id="resolution">x</span>🎯
+<code>CPU</code> : Intel CSA-8750H (UPES-12) @ 2.2GHz 🚀
+<code>GPU</code> : NVIDIA GeForce GTX 1050 Ti 🎮
+<code>Memory</code> : 4KB 💾
+                    
                 </pre>
             </div>
-    
-            <pre>Type <code>help</code> to see the list of commands.</pre>
-        `;
-    
+
+            <pre>type <code>help</code> to see the list of commands.</pre>
+        </div>`;
+
         // Clear the input field
         commandInput.value = '';
-    
+
         // Reinitialize uptime after the terminal is cleared
         const uptimeElement = document.getElementById('uptime');
-        updateUptime(uptimeElement); // Call updateUptime after clearing
-    
+       
+        if (uptimeElement) {
+            updateUptime(uptimeElement); // Call updateUptime after clearing
+        }
+
+        const resolutionElement = document.getElementById('resolution');
+        if (resolutionElement) {
+            updateResolution(resolutionElement);
+        }
+
         // Return an empty string as output
         return '';
     },
-    
-    
-    
+
     "rm-rf": function() {
         window.close();
     },
@@ -101,23 +109,21 @@ Memory: 8GB 💾
         if (currentDirectory === "blog") {
             currentDirectory = "home";
             updatePrompt();
-            return `Moved to home directory`;
+            return `<span class="command">Moved to home directory</span>`;
         } else if (currentDirectory === "home") {
             updatePrompt();
-            return `Already in the home directory`;
-        } 
-        
-        
-        else {
+            return `<span class="command">Already in the home directory</span>`;
+        } else {
             playErrorSound();
-            return `cd..: No such directory`;
+            return `<span class="error">cd..: No such directory</span>`;
         }
     }
 };
 
+
 // Function to update the command prompt
 export function updatePrompt() {
-    let promptText = `$ [${currentDirectory}] > `;
+    let promptText = `~[${currentDirectory}] > `;
     commandInput.placeholder = promptText;
 }
 

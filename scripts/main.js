@@ -42,7 +42,7 @@ commandInput.addEventListener("keydown", function(event) {
         let result = commands[command] ? commands[command](args) : `Command not found: ${command}`;
         
         if (result) {
-            outputElement.innerHTML += `\n♪ ${commandText}\n${result}\n\n`;
+            outputElement.innerHTML += `\n♪ ${commandText}\n${result}\n`;
         }
         commandInput.value = '';
         scrollToBottom();

@@ -13,40 +13,51 @@
 </head>
 <body>
     <div id="terminal">
+       
         <div id="output">
+            <p> </p>
+           
             <!-- Container for ASCII art and system info -->
             <div id="ascii-system-container">
                 <pre id="ascii-art">
-   _____ _                _______        _       
+   <!-- _____ _                _______        _       
   |_   _| |              |__   __|      | |      
     | | | |__   ___  _ __   | | ___  ___| |_ ___ 
     | | | '_ \ / _ \| '_ \  | |/ _ \/ __| __/ __|
    _| |_| | | | (_) | | | | | |  __/ (__| |_\__ \
-  |_____|_| |_|\___/|_| |_| |_|\___|\___|\__|___/
+  |_____|_| |_|\___/|_| |_| |_|\___|\___|\__|___/ -->
+  <iframe src="https://giphy.com/embed/JqmupuTVZYaQX5s094" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Smolverse-smol-smolverse-swol-JqmupuTVZYaQX5s094"></a></p>
                 </pre>
                 
                 <pre id="system-info">
-OS: Terminal Themed Blog OS 🌐
-Kernel: 5.10.60-generic 🐧
-Uptime: <span id="uptime">...</span>⏱️
-Packages: 34 (npm) 📦
-Shell: TunedTerminal 1.0 🖥️
-Resolution: <span id="resolution">1920x1080</span>🎯
-CPU: Intel i7-8750H (12) @ 2.2GHz 🚀
-GPU: NVIDIA GeForce GTX 1050 Ti 🎮
-Memory: 8GB 💾
+<code>OS</code> : Terminal Themed Blog OS 🌐
+<code>Kernel</code> : UPES CSA  🐧
+<code>Theme</code> : Cyberpunk Security 🌃
+<code>Uptime</code> : <span id="uptime">...</span>⏱️
+<code>Packages</code> : 34 (npm) 📦
+<code>Shell</code> : TunedTerminal 1.0 🖥️
+<code>Resolution</code> : <span id="resolution">1920x1080</span>🎯
+<code>CPU</code> : Intel CSA-8750H (UPES-12) @ 2.2GHz 🚀
+<code>GPU</code> : NVIDIA GeForce GTX 1050 Ti 🎮
+<code>Memory</code> : 4KB 💾
+                    
                 </pre>
             </div>
 
-            <pre>Type <code>help</code> to see the list of commands.</pre>
+            <pre>type <code>help</code> to see the list of commands.</pre>
         </div>
         <div id="input">
-            <span id="prompt">$ </span>
+            <span id="prompt">♪ </span>
             <input type="text" id="command" autofocus autocomplete="off">
         </div>
     </div>
 
-   
+    <!-- Buttons for "About Me" and "Help" -->
+    <div id="footer-buttons">
+        <a href="about.html"><button id="about-btn">About Me</button></a>
+        <button id="help-btn">Help</button>
+    </div>
+  
     <!-- Prism.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
 </body>
