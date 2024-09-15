@@ -67,8 +67,7 @@ iframe {
 
 #command {
     background-color: transparent;
-    border: none;
-    color: #fff;
+    border: none;  color: #fff;
     font-family: monospace;
     width: 100%;
     outline: none;
