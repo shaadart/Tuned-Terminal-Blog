@@ -4,9 +4,13 @@ export const outputElement = document.getElementById("output");
 export const commandInput = document.getElementById("command");
 
 let currentDirectory = "home";
-
-
-
+let blogs = {
+    "encryption_and_music.docx": {
+        title: "Encryption and Music",
+        content: "This blog discusses the relationship between encryption and music. PLEASE VISIT ON 16th!"
+    },
+   
+};
 export const commands = {
     help: function() {
         return `Available commands:\n <span class="command">ls</span>List directories and blog posts\n <span class="command">cd [directory]</span>Moves you into a specific directory (or folder)\n <span class="command">cat [file]</span>Read the content of a blog post\n <span class="command">clear</span>Clear the terminal`;
@@ -32,15 +36,16 @@ export const commands = {
         if (currentDirectory === "blog") {
             const file = args[0];
             if (blogs[file]) {
-                return `<h3>Title: ${blogs[file].title}</h3>\n<pre><code>${Prism.highlight(blogs[file].content, Prism.languages.javascript, 'javascript')}</code></pre>`;
+                return `<h3>Title: ${blogs[file].title}</h3>\n<pre><code class="language-javascript">${Prism.highlight(blogs[file].content, Prism.languages.javascript, 'javascript')}</code></pre>`;
             } else {
+                playErrorSound();
                 return `<span class="error">cat: ${file}: No such file</span>`;
             }
         } else {
+            playErrorSound();
             return `<span class="error">cat: You are not in the blog directory</span>`;
         }
     },
-
     "clear": function() {
         // Reset the terminal output to the default HTML content
         outputElement.innerHTML = `
@@ -53,8 +58,8 @@ export const commands = {
     | | | '_ \ / _ \| '_ \  | |/ _ \/ __| __/ __|
    _| |_| | | | (_) | | | | | |  __/ (__| |_\__ \
   |_____|_| |_|\___/|_| |_| |_|\___|\___|\__|___/ -->
-   <img src="logo.png" alt="Image Description" style="flex: 1; width: auto; height: 144px;">
-              </pre>
+  <iframe src="https://giphy.com/embed/JqmupuTVZYaQX5s094" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/Smolverse-smol-smolverse-swol-JqmupuTVZYaQX5s094"></a></p>
+                </pre>
                 
                 <pre id="system-info">
 <code>OS</code> : Terminal Themed Blog OS 🌐
