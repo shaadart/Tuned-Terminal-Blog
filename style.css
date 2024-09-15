@@ -174,3 +174,27 @@ pre code .token.function {
         padding: 5px;
     }
 }
+
+
+/* Add CSS for blog content styling */
+img {
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #559fff;
+}
+
+blockquote {
+    border-left: 2px solid #559fff;
+    padding-left: 10px;
+    margin: 10px 0;
+    color: #c4e0ff;
+    font-style: italic;
+}
+
+footer {
+    color: #aaa;
+    font-size: 0.9em;
+}
