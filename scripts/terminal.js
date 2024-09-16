@@ -35,8 +35,13 @@ export const commands = {
     cat: function(args) {
         if (currentDirectory === "blog") {
             const file = args[0];
-            if (blogs[file]) {
-                return `<h3>Title: ${blogs[file].title}</h3>\n<pre><code class="language-javascript">${Prism.highlight(blogs[file].content, Prism.languages.javascript, 'javascript')}</code></pre>`;
+            if (file.endsWith('.pdf') && Object.keys(blogs).includes(file.replace('.pdf', '.docx'))) {
+                // Open the PDF in a new page
+                window.open(`pdf-viewer.html?file=${file}`, '_blank');
+                return `<span class="command">Opening ${file}...</span>`;
+            } else if (file.endsWith('.docx') && blogs[file]) {
+                // Handle DOCX files if needed
+                return `<span class="command">${blogs[file].content}</span>`;
             } else {
                 playErrorSound();
                 return `<span class="error">cat: ${file}: No such file</span>`;
@@ -46,6 +51,7 @@ export const commands = {
             return `<span class="error">cat: You are not in the blog directory</span>`;
         }
     },
+    
     "clear": function() {
         // Reset the terminal output to the default HTML content
         outputElement.innerHTML = `
