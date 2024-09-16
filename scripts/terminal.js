@@ -104,7 +104,7 @@ export const commands = {
         return '';
     },
 
-    "rm-rf": function() {
+    'rm-rf' : function() {
         window.close();
     },
 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musical Cryptography Tool</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+
+    <div id="terminal">
+        <div id="ascii-system-container">
+            <pre id="ascii-art">
+                __________
+                1          1
+                1          1
+                1          1
+           ____ 1     ____ 1
+          /    \1    /    \1
+         1      1   1      1
+          \____/     \____/
+
+            </pre>
+
+            <pre id="system-info">
+                <code>OS</code> : Text to Music Encryption 🎵💻
+                <code>Kernel</code> : UPES CSA  🐧
+                <code>Theme</code> : Moosicpunk Security 🌃
+                <a href="index.html"><code>Shell</code> : TunedTerminal 1.0 🖥️</a>
+                <code>Resolution</code> : <span id="resolution">Pretty High.mp3</span>
+                <code>Memory</code> : 13KB 💾
+                                    
+                                </pre>
+           
+        </div>
+    
+        <div id="output">
+            <div id="input">
+                <span id="prompt">♪ </span>
+                <input type="text" id="command"   autofocus autocomplete="off"  >
+            </div>
+            <div id="result" class="result"></div>
+           
+        </div>
+    
+        <!-- Footer with buttons if needed -->
+        <div id="footer-buttons" style="text-align: left;">
+          
+                <span id="prompt">♪ ~</span>
+                <button onclick="encryptText()" class="command">Encrypt Text</button>
+         
+           
+                <button onclick="playMusic()" class="command" style="border: 1px solid lightgreen; color: lightgreen;">Play Music</button>
+         
+            <button onclick="clearTerminal()" style="border: 1px solid rgb(255, 109, 109); color: rgb(255, 176, 176);">Clear</button>
+        </div>
+    </div>
+    
+
+<script>
+    const table1 = {
+        'A': 'Sa', 'B': 'Re', 'C': 'Ga', 'D': 'Ma', 'E': 'Pa', 'F': 'Dha', 'G': 'Ni',
+        'H': 'SaSa', 'I': 'SaRe', 'J': 'SaGa', 'K': 'SaMa', 'L': 'SaPa', 'M': 'SaDha', 'N': 'SaNi',
+        'O': 'ReSa', 'P': 'ReRe', 'Q': 'ReGa', 'R': 'ReMa', 'S': 'RePa', 'T': 'ReDha', 'U': 'ReNi',
+        'V': 'GaSa', 'W': 'GaRe', 'X': 'GaGa', 'Y': 'GaMa', 'Z': 'GaPa', 
+        '0': 'GaDha', '1': 'GaNi', '2': 'MaSa', '3': 'MaRe', '4': 'MaGa', '5': 'MaMa',
+        '6': 'MaPa', '7': 'MaDha', '8': 'MaNi', '9': 'NiNi'
+    };
+
+    const table2 = {
+        'Sa': 'C', 'Re': 'D', 'Ga': 'E', 'Ma': 'F', 'Pa': 'G', 'Dha': 'A', 'Ni': 'B',
+        'SaSa': 'CC', 'SaRe': 'CD', 'SaGa': 'CE', 'SaMa': 'CF', 'SaPa': 'CG', 'SaDha': 'CA', 'SaNi': 'CB',
+        'ReSa': 'DC', 'ReRe': 'DD', 'ReGa': 'DE', 'ReMa': 'DF', 'RePa': 'DG', 'ReDha': 'DA', 'ReNi': 'DB',
+        'GaSa': 'EC', 'GaRe': 'ED', 'GaGa': 'EE', 'GaMa': 'EF', 'GaPa': 'EG', 'GaDha': 'EA', 'GaNi': 'EB',
+        'MaSa': 'FC', 'MaRe': 'FD', 'MaGa': 'FE', 'MaMa': 'FF', 'MaPa': 'FG', 'MaDha': 'FA', 'MaNi': 'FB',
+        'NiNi': 'BB'
+    };
+
+    let indianNotes = [];
+    let westernNotes = [];
+
+    function encryptText() {
+        const input = document.getElementById('command').value.toUpperCase();
+        indianNotes = [];
+        westernNotes = [];
+
+        for (let char of input) {
+            if (table1[char]) {
+                const indianNote = table1[char];
+                const westernNote = table2[indianNote] || ' ';
+                indianNotes.push(indianNote);
+                westernNotes.push(westernNote);
+                indianNotes.push('1'); // Add '1' space between letters
+            } else if (char === ' ') {
+                indianNotes.push('0'); // Add '0' space between words
+                westernNotes.push(' ');
+            }
+        }
+
+        // Remove last '1' from the end
+        if (indianNotes[indianNotes.length - 1] === '1') {
+            indianNotes.pop();
+        }
+
+        document.getElementById('result').innerHTML = `
+            <strong>Indian Notes:</strong> ${indianNotes.join(' ')}<br>
+            <strong>Western Notes:</strong> ${westernNotes.join(' ')}
+        `;
+    }
+
+    function clearTerminal() {
+        document.getElementById('command').value = '';
+        document.getElementById('result').innerHTML = '';
+        indianNotes = [];
+        westernNotes = [];
+    }
+
+    // Play the music based on the Western music notes
+    function playMusic() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        let time = audioCtx.currentTime;
+        const noteDuration = 0.5; // seconds
+
+        for (let note of westernNotes) {
+            if (note.trim()) {
+                playTone(note, time, audioCtx);
+                time += noteDuration;
+            }
+        }
+    }
+
+    function playTone(note, startTime, audioCtx) {
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.type = 'sine'; // simple sine wave
+        oscillator.frequency.setValueAtTime(getFrequency(note), audioCtx.currentTime); // Set frequency for the note
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime); // Volume control
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(startTime);
+        oscillator.stop(startTime + 0.5); // Each note lasts 0.5 seconds
+    }
+
+    // Frequency table for Western music notes
+    function getFrequency(note) {
+        const frequencies = {
+            'C': 261.63,
+            'D': 293.66,
+            'E': 329.63,
+            'F': 349.23,
+            'G': 392.00,
+            'A': 440.00,
+            'B': 493.88,
+            'CC': 523.25,
+            'CD': 554.37,
+            'CE': 587.33,
+            'CF': 622.25,
+            'CG': 659.25,
+            'CA': 698.46,
+            'CB': 739.99
+        };
+        return frequencies[note] || 440.00; // Default to A (440 Hz) if note is not found
+    }
+</script>
+
+</body>
+</html>
