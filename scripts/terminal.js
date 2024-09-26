@@ -19,7 +19,7 @@ export const commands = {
         if (currentDirectory === "home") {
             return "<span class='directory'>home</span>\n<span class='directory'>blog/</span>";
         } else if (currentDirectory === "blog") {
-            return Object.keys(blogs).map(file => `<span class='file'>- ${file}</span>`).join('\n');
+            return "encryption_and_music.pdf\n";
         }
     },
     "cd": function(args) {
@@ -28,7 +28,7 @@ export const commands = {
             updatePrompt();
             return `<span class="command">Moved to ${args[0]} directory</span>`;
         } else {
-            playErrorSound();
+            
             return `<span class="error">cd: ${args[0]}: No such directory</span>`;
         }
     },
@@ -70,10 +70,9 @@ export const commands = {
 ⠠⠀⠈⠓⠒⠦⠭⠭⠭⣭⠭⠭⠭⠭⠿⠓⠒⠛⠉⠉⠀⠀⣠⠏⠀⠀⠘⠞⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⢤⣀⠀⠀⠀⠀⠀⠀⣀⡤⠞⠁⠀⣰⣆⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠘⠿⠀⠀⠀⠀⠀⠈⠉⠙⠒⠒⠛⠉⠁⠀⠀⠀⠉⢳⡞⠉⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
   </pre>
                 
-                <pre id="system-info">
+<pre id="system-info">
 <code>OS</code> : Terminal Themed Blog OS 🌐
 <code>Kernel</code> : UPES CSA  🐧
 <code>Theme</code> : Cyberpunk Security 🌃
