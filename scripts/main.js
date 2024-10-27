@@ -27,7 +27,7 @@ document.addEventListener("keydown", function(event) {
     }
     if (event.code === 'Space') {
         let commandText = commandInput.value.trim();
-        let [command, ...args] = commandText.split(" ");
+        let [command, ...args] = commandText.split("");
         if (command.length > 0 && keyToNote[`Key${command[0]}`]) {
             playNote(keyToNote[`Key${command[0]}`], audioContext.currentTime, 200);
         }
