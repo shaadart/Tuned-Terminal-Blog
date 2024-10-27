@@ -39,7 +39,7 @@ commandInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         const commandText = commandInput.value.trim();
         let [command, ...args] = commandText.split(" ");
-        let result = commands[command] ? commands[command](args) : `Command not found: ${command}`;
+        let result = commands[command] ? commands[command](args) : `Command not found sure: ${command}`;
         
         if (result) {
             outputElement.innerHTML += `\n♪ ${commandText}\n${result}\n`;
